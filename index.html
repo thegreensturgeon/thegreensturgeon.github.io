@@ -6,7 +6,6 @@
 <title>The Green Sturgeon</title>
 
 <style>
-/* Prevent any white side gaps */
 html, body {
   margin: 0;
   padding: 0;
@@ -17,37 +16,33 @@ html, body {
   font-family: Arial, sans-serif;
 }
 
-/* Full screen image */
 #bg {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
   object-fit: cover;
   z-index: 0;
 }
 
-/* Overlay form layer */
 .form-layer {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   z-index: 2;
 }
 
-/* Invisible inputs (we will align these over your image fields) */
-input {
+input, button {
   position: absolute;
   border: none;
   background: transparent;
   outline: none;
-  color: transparent; /* keeps text invisible so design stays clean */
 }
 
-/* Adjust these positions to match your image */
+input {
+  color: transparent;
+  caret-color: transparent;
+}
+
 #name {
   top: 42%;
   left: 15%;
@@ -69,36 +64,31 @@ input {
   height: 5%;
 }
 
-/* Invisible button overlay */
 button {
-  position: absolute;
   top: 68%;
   left: 25%;
   width: 50%;
   height: 6%;
-  background: transparent;
-  border: none;
 }
 </style>
 </head>
 
 <body>
 
-<img id="bg" src="hero.jpg" alt="Background" />
+<img
+  id="bg"
+  src="https://thegreensturgeon.github.io/hero.jpg"
+  alt="Background"
+/>
 
 <form class="form-layer"
       action="mailto:TheGreenSturgeon@yahoo.com"
       method="POST"
       enctype="text/plain">
-
   <input id="name" name="name" type="text" placeholder="Name" required />
-
   <input id="email" name="email" type="email" placeholder="Email" required />
-
   <input id="birthday" name="birthday" type="date" required />
-
   <button type="submit"></button>
-
 </form>
 
 </body>
