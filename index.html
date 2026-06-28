@@ -13,20 +13,16 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: black;
   font-family: Arial, sans-serif;
+
+  /* FIX: background now handled properly */
+  background-image: url("https://thegreensturgeon.github.io/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* Background image locked to screen */
-#bg {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Overlay form stays fixed (does NOT move on keyboard) */
+/* Overlay form stays fixed */
 .form-layer {
   position: fixed;
   inset: 0;
@@ -48,7 +44,7 @@ input {
   caret-color: white;
 }
 
-/* OPTIONAL alignment helper */
+/* Focus highlight */
 input:focus {
   background: rgba(255,255,255,0.10);
   border-radius: 4px;
@@ -89,8 +85,6 @@ button {
 
 <body>
 
-<img id="bg" src="https://thegreensturgeon.github.io/hero.jpg" />
-
 <form class="form-layer"
       action="mailto:TheGreenSturgeon@yahoo.com"
       method="POST"
@@ -98,8 +92,6 @@ button {
 
   <input id="name" name="name" type="text" placeholder="Name" required />
   <input id="email" name="email" type="email" placeholder="Email" required />
-
-  <!-- CHANGED HERE (this is the fix) -->
   <input id="birthday" name="birthday" type="text" placeholder="Bday mm/dd/yyyy" required />
 
   <button type="submit"></button>
