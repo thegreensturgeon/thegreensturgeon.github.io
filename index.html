@@ -42,20 +42,19 @@ input, button {
   font-size: 16px;
 }
 
-/* 👁️ Make text visible (important fix) */
+/* Make text visible */
 input {
   color: rgba(255,255,255,0.85);
   caret-color: white;
 }
 
-/* OPTIONAL: helps you see alignment while testing
-   (remove later if you want fully invisible inputs) */
+/* OPTIONAL alignment helper */
 input:focus {
   background: rgba(255,255,255,0.10);
   border-radius: 4px;
 }
 
-/* POSITIONING (your original layout) */
+/* POSITIONING */
 #name {
   top: 51.5%;
   left: 29%;
@@ -99,7 +98,9 @@ button {
 
   <input id="name" name="name" type="text" placeholder="Name" required />
   <input id="email" name="email" type="email" placeholder="Email" required />
-  <input id="birthday" name="birthday" type="date" required />
+
+  <!-- CHANGED HERE (this is the fix) -->
+  <input id="birthday" name="birthday" type="text" placeholder="Birthday (MM/DD/YYYY)" required />
 
   <button type="submit"></button>
 </form>
