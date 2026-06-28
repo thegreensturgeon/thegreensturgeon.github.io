@@ -2,132 +2,104 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>The Green Sturgeon</title>
 
 <style>
-• {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: Arial, sans-serif;
-}
-
+/* Prevent any white side gaps */
 html, body {
-height: 100%;
-width: 100%;
-overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: black;
+  font-family: Arial, sans-serif;
 }
 
-/* FULL SCREEN BACKGROUND IMAGE */
-body {
-background: url("hero.jpg") no-repeat center center;
-background-size: cover;
-position: relative;
+/* Full screen image */
+#bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
 }
 
-/* DARK OVERLAY (light, so image still shows) */
-body::before {
-content: "";
-position: absolute;
-inset: 0;
-background: rgba(0,0,0,0.35);
-z-index: 0;
+/* Overlay form layer */
+.form-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
 }
 
-/* FORM WRAPPER (NO BLOCKING LAYER) */
-.form-box {
-position: relative;
-z-index: 2;
-
-height: 100%;
-width: 100%;
-
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-
-text-align: center;
-padding: 20px;
-color: white;
-}
-
-/* HEADINGS */
-h1 {
-letter-spacing: 2px;
-margin-bottom: 6px;
-}
-
-p {
-font-size: 12px;
-margin-bottom: 18px;
-opacity: 0.8;
-}
-
-/* FORM STYLE */
-form {
-width: 100%;
-max-width: 320px;
-}
-
+/* Invisible inputs (we will align these over your image fields) */
 input {
-width: 100%;
-padding: 12px;
-margin: 8px 0;
-
-border: 1px solid rgba(255,255,255,0.25);
-background: rgba(0,0,0,0.35);
-color: white;
-
-outline: none;
-border-radius: 4px;
+  position: absolute;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: transparent; /* keeps text invisible so design stays clean */
 }
 
-input::placeholder {
-color: rgba(255,255,255,0.7);
+/* Adjust these positions to match your image */
+#name {
+  top: 42%;
+  left: 15%;
+  width: 70%;
+  height: 5%;
 }
 
-/* BUTTON */
+#email {
+  top: 50%;
+  left: 15%;
+  width: 70%;
+  height: 5%;
+}
+
+#birthday {
+  top: 58%;
+  left: 15%;
+  width: 70%;
+  height: 5%;
+}
+
+/* Invisible button overlay */
 button {
-width: 100%;
-padding: 12px;
-margin-top: 10px;
-
-background: gold;
-border: none;
-font-weight: bold;
-cursor: pointer;
-border-radius: 4px;
-}
-
-/* MOBILE FIX */
-@media (max-width: 480px) {
-form {
-max-width: 90%;
-}
+  position: absolute;
+  top: 68%;
+  left: 25%;
+  width: 50%;
+  height: 6%;
+  background: transparent;
+  border: none;
 }
 </style>
 </head>
 
 <body>
 
-<div class="form-box">
+<img id="bg" src="hero.jpg" alt="Background" />
 
-<h1>COMING SOON</h1>
-<p>Stay connected</p>
+<form class="form-layer"
+      action="mailto:TheGreenSturgeon@yahoo.com"
+      method="POST"
+      enctype="text/plain">
 
-<form name="signup" method="POST" data-netlify="true">
-<input type="hidden" name="form-name" value="signup" />
+  <input id="name" name="name" type="text" placeholder="Name" required />
 
-<input type="text" name="name" placeholder="Enter your name" required />
-<input type="email" name="email" placeholder="Enter your email" required />
-<input type="date" name="birthday" required />
+  <input id="email" name="email" type="email" placeholder="Email" required />
 
-<button type="submit">JOIN</button>
+  <input id="birthday" name="birthday" type="date" required />
+
+  <button type="submit"></button>
+
 </form>
-
-</div>
 
 </body>
 </html>
