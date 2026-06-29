@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -25,14 +25,14 @@ html, body {
 }
 
 /* =========================
-   FORM WRAP (SMALLER)
+   FORM POSITION (MOVED LOWER)
 ========================= */
 .form-wrap {
   position: absolute;
-  top: 56%;
+  top: 68%; /* ⬅️ LOWER (was ~55%) */
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(300px, 88vw); /* ⬅️ smaller box */
+  width: min(310px, 88vw);
   z-index: 10;
 }
 
@@ -52,33 +52,36 @@ html, body {
 }
 
 /* =========================
-   TEXT (FIX NEWSLETTER SIZE)
+   NEWSLETTER BLOCK (FIXED)
 ========================= */
-.sib-form-block p:first-child {
-  font-size: 16px !important;   /* ⬅️ was too big */
-  font-weight: 600 !important;
-  margin-bottom: 4px;
-}
-
 .sib-form-block p {
-  font-size: 12px !important;
-  color: rgba(255,255,255,0.85) !important;
-  margin: 0 0 6px 0;
+  text-align: center;
+  color: rgba(201, 170, 90, 0.95) !important; /* same gold as "COMING SOON" */
+  margin: 0;
+  font-size: 13px !important; /* SAME SIZE BOTH LINES */
+  line-height: 1.4;
 }
 
-.entry__label {
-  font-size: 12px !important;
-  color: rgba(255,255,255,0.8) !important;
+.sib-form-block p:first-child {
+  font-weight: 600;
+  margin-bottom: 2px;
 }
 
 /* =========================
-   INPUT (SMALLER + CLEAN)
+   REMOVE EMAIL LABEL
+========================= */
+.entry__label {
+  display: none !important;
+}
+
+/* =========================
+   INPUT (SMALL + MATCHED WIDTH)
 ========================= */
 input {
   width: 100% !important;
   box-sizing: border-box;
-  padding: 8px;            /* ⬅️ smaller */
-  margin-top: 6px;
+  padding: 8px;
+  margin-top: 10px;
   margin-bottom: 10px;
   border: 1px solid rgba(255,255,255,0.2);
   background: rgba(0,0,0,0.25);
@@ -88,40 +91,28 @@ input {
   font-size: 13px;
 }
 
-/* placeholder */
 input::placeholder {
   color: rgba(255,255,255,0.5);
 }
 
 /* =========================
-   BUTTON (SMALLER)
+   SUBSCRIBE BUTTON (SMALLER)
 ========================= */
 button {
   width: 100%;
-  padding: 10px; /* ⬅️ smaller */
+  padding: 8px; /* smaller */
   background: rgba(200, 170, 90, 0.85);
   border: none;
   border-radius: 6px;
   color: black;
   font-weight: bold;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12px; /* smaller text */
+  letter-spacing: 0.5px;
 }
 
 button:hover {
   background: rgba(220, 190, 110, 0.95);
-}
-
-/* =========================
-   🚨 HIDE BREVO EXTRA BOX
-========================= */
-.input--hidden,
-input[name="email_address_check"] {
-  display: none !important;
-  height: 0 !important;
-  width: 0 !important;
-  opacity: 0 !important;
-  position: absolute !important;
 }
 
 </style>
@@ -139,20 +130,19 @@ input[name="email_address_check"] {
               method="POST"
               action="https://0140e1bd.sibforms.com/serve/MUIFAOOVyIg_Cfwv5nZp80lUy3Enq3zIE1JJFI4e_2mbkZEM5TGt8WScTgwGKPGUPcB6wjlwcq_w-Pq33aDPaW1qS3bo7hs7GkblmCLNYOHWYi2yLnHD7tv5gcrz7WOQlG-s5eDX07mhQk1Z6ReuGbFq_IYCd4BUwtPmhk0bBYUf9kOezm6ew1H0yi4j44l29V-jm1HZ2xcZxY0IKQ==">
 
-          <!-- TEXT -->
+          <!-- NEWSLETTER -->
           <div class="sib-form-block">
             <p>Newsletter</p>
             <p>Stay updated with The Green Sturgeon</p>
           </div>
 
-          <!-- EMAIL -->
-          <label class="entry__label">Email</label>
+          <!-- EMAIL INPUT -->
           <input type="email" id="EMAIL" name="EMAIL" placeholder="Enter your email" required />
 
-          <!-- BUTTON -->
+          <!-- SUBSCRIBE -->
           <button type="submit">SUBSCRIBE</button>
 
-          <!-- HIDDEN BREVO FIELD (ANTI-SPAM) -->
+          <!-- HIDDEN BREVO FIELD -->
           <input type="text" name="email_address_check" value="" class="input--hidden">
           <input type="hidden" name="locale" value="en">
           <input type="hidden" name="html_type" value="simple">
