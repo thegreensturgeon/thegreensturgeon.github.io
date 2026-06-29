@@ -15,42 +15,37 @@ html, body {
   overflow: hidden;
   font-family: Arial, sans-serif;
 
-  /* FIX: background now handled properly */
   background-image: url("https://thegreensturgeon.github.io/hero.jpg?v=3");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* Overlay form stays fixed */
+/* YOUR EXISTING UI (unchanged layout) */
 .form-layer {
   position: fixed;
   inset: 0;
   z-index: 2;
 }
 
-/* Inputs */
-input, button {
+/* Inputs styled to match your design */
+input {
   position: absolute;
   border: none;
   outline: none;
   background: transparent;
   font-size: 16px;
-}
-
-/* Make text visible */
-input {
   color: rgba(255,255,255,0.85);
   caret-color: white;
 }
 
-/* Focus highlight */
+/* Focus effect */
 input:focus {
   background: rgba(255,255,255,0.10);
   border-radius: 4px;
 }
 
-/* POSITIONING */
+/* EXACT POSITIONING (your design preserved) */
 #name {
   top: 51.5%;
   left: 29%;
@@ -72,30 +67,62 @@ input:focus {
   height: 2%;
 }
 
-/* Button */
-button {
+/* YOUR JOIN BUTTON (now clickable but invisible Brevo trigger behind it) */
+#joinButton {
+  position: absolute;
   top: 63%;
   left: 29%;
   width: 37%;
-  height: 2%;
+  height: 3%;
   background: transparent;
+  border: none;
+  cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<form class="form-layer"
-      action="mailto:TheGreenSturgeon@yahoo.com"
+<!-- YOUR VISUAL DESIGN -->
+<div class="form-layer">
+
+  <input id="name" type="text" placeholder="Name" />
+  <input id="email" type="email" placeholder="Email" />
+  <input id="birthday" type="text" placeholder="Bday mm/dd/yyyy" />
+
+  <!-- THIS is your JOIN button from the image -->
+  <button id="joinButton"></button>
+
+</div>
+
+<!-- HIDDEN BREVO FORM (REAL BACKEND) -->
+<form id="brevoForm"
       method="POST"
-      enctype="text/plain">
+      action="https://0140e1bd.sibforms.com/serve/MUIFAOOVyIg_Cfwv5nZp80lUy3Enq3zIE1JJFI4e_2mbkZEM5TGt8WScTgwGKPGUPcB6wjlwcq_w-Pq33aDPaW1qS3bo7hs7GkblmCLNYOHWYi2yLnHD7tv5gcrz7WOQlG-s5eDX07mhQk1Z6ReuGbFq_IYCd4BUwtPmhk0bBYUf9kOezm6ew1H0yi4j44l29V-jm1HZ2xcZxY0IKQ==">
 
-  <input id="name" name="name" type="text" placeholder="Name" required />
-  <input id="email" name="email" type="email" placeholder="Email" required />
-  <input id="birthday" name="birthday" type="text" placeholder="Bday mm/dd/yyyy" required />
+  <input type="hidden" name="EMAIL" id="brevo_email">
+  <input type="hidden" name="FIRSTNAME" id="brevo_name">
+  <input type="hidden" name="BIRTHDAY" id="brevo_birthday">
 
-  <button type="submit"></button>
+  <input type="hidden" name="locale" value="en">
+  <input type="hidden" name="html_type" value="simple">
+
 </form>
+
+<script>
+document.getElementById("joinButton").addEventListener("click", function() {
+
+  // map your visible fields → brevo hidden fields
+  document.getElementById("brevo_email").value = document.getElementById("email").value;
+  document.getElementById("brevo_name").value = document.getElementById("name").value;
+  document.getElementById("brevo_birthday").value = document.getElementById("birthday").value;
+
+  // submit to Brevo
+  document.getElementById("brevoForm").submit();
+
+  alert("You're in.");
+});
+</script>
 
 </body>
 </html>
