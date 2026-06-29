@@ -3,10 +3,34 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
-
 <title>The Green Sturgeon</title>
 
+<!-- Brevo Fonts + Base Styles -->
 <style>
+@font-face {
+  font-display: block;
+  font-family: Roboto;
+  src: url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2) format("woff2"),
+       url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff) format("woff");
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: Roboto;
+  font-weight: 600;
+  src: url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2) format("woff2"),
+       url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/71501f0d8d5aa95960f6475d5487d4c2.woff) format("woff");
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: Roboto;
+  font-weight: 700;
+  src: url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/3ef7cf158f310cf752d5ad08cd0e7e60.woff2) format("woff2"),
+       url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/ece3a1d82f18b60bcce0211725c476aa.woff) format("woff");
+}
+
+/* PAGE BACKGROUND */
 html, body {
   margin: 0;
   padding: 0;
@@ -15,177 +39,108 @@ html, body {
   overflow: hidden;
   font-family: Arial, sans-serif;
 
-  background-image: url("https://thegreensturgeon.github.io/hero.jpg?v=3");
+  background-image: url("/mnt/data/1782711996594.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* FORM LAYER */
-.form-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 2;
+/* CENTER FORM IN EMPTY WATER AREA */
+.form-wrap {
+  position: absolute;
+  top: 56%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  z-index: 5;
 }
 
-/* INPUTS */
+/* REMOVE BREVO BOX STYLING */
+#sib-container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* TEXT STYLING */
+.sib-form-block {
+  background: transparent !important;
+}
+
+.sib-form-block p,
+.entry__label {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* INPUT STYLING */
 input {
-  position: absolute;
-  border: none;
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.25);
+  color: white;
+  border-radius: 6px;
   outline: none;
-  background: transparent;
-  font-size: 16px;
-  color: rgba(255,255,255,0.85);
-  caret-color: white;
 }
 
-input:focus {
-  background: rgba(255,255,255,0.10);
-  border-radius: 4px;
+input::placeholder {
+  color: rgba(255,255,255,0.5);
 }
 
-/* POSITIONING */
-#name {
-  top: 51.5%;
-  left: 29%;
-  width: 37%;
-  height: 2%;
-}
-
-#email {
-  top: 55.2%;
-  left: 29%;
-  width: 37%;
-  height: 2%;
-}
-
-#birthday {
-  top: 59%;
-  left: 29%;
-  width: 37%;
-  height: 2%;
-}
-
-/* INVISIBLE BUTTON HIT AREA */
-#joinButton {
-  position: absolute;
-  top: 63%;
-  left: 29%;
-  width: 37%;
-  height: 3%;
-  background: transparent;
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 12px;
+  background: rgba(200, 170, 90, 0.85);
   border: none;
+  border-radius: 6px;
+  color: black;
+  font-weight: bold;
   cursor: pointer;
 }
 
-/* SUCCESS OVERLAY */
-#successMessage {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(4px);
-}
-
-.success-box {
-  text-align: center;
-  color: white;
-  padding: 22px 30px;
-  border-radius: 10px;
-  background: rgba(0,0,0,0.6);
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
-.success-box h2 {
-  margin: 0 0 8px 0;
-  font-size: 22px;
-}
-
-.success-box p {
-  margin: 0;
-  font-size: 14px;
-  opacity: 0.85;
+button:hover {
+  background: rgba(220, 190, 110, 0.95);
 }
 </style>
 </head>
 
 <body>
 
-<div class="form-layer">
+<div class="form-wrap">
 
-  <input id="name" type="text" placeholder="Name" />
-  <input id="email" type="email" placeholder="Email" />
-  <input id="birthday" type="text" placeholder="Bday mm/dd/yyyy" />
+<!-- Begin Brevo Form -->
+<div class="sib-form">
+  <div id="sib-form-container" class="sib-form-container">
 
-  <button id="joinButton"></button>
+    <div id="sib-container" class="sib-container--large sib-container--vertical">
 
-</div>
+      <form id="sib-form"
+            method="POST"
+            action="https://0140e1bd.sibforms.com/serve/MUIFAOOVyIg_Cfwv5nZp80lUy3Enq3zIE1JJFI4e_2mbkZEM5TGt8WScTgwGKPGUPcB6wjlwcq_w-Pq33aDPaW1qS3bo7hs7GkblmCLNYOHWYi2yLnHD7tv5gcrz7WOQlG-s5eDX07mhQk1Z6ReuGbFq_IYCd4BUwtPmhk0bBYUf9kOezm6ew1H0yi4j44l29V-jm1HZ2xcZxY0IKQ==">
 
-<!-- SUCCESS MESSAGE -->
-<div id="successMessage">
-  <div class="success-box">
-    <h2>You're in.</h2>
-    <p>Welcome to The Green Sturgeon.</p>
+        <div class="sib-form-block">
+          <p style="font-size:22px; font-weight:700;">Newsletter</p>
+          <p style="font-size:14px;">Stay updated with The Green Sturgeon</p>
+        </div>
+
+        <label class="entry__label">Email</label>
+        <input type="text" id="EMAIL" name="EMAIL" placeholder="Enter your email" required />
+
+        <button type="submit">SUBSCRIBE</button>
+
+        <input type="text" name="email_address_check" value="" class="input--hidden">
+        <input type="hidden" name="locale" value="en">
+        <input type="hidden" name="html_type" value="simple">
+
+      </form>
+    </div>
   </div>
 </div>
 
-<!-- HIDDEN BREVO FORM -->
-<form id="brevoForm"
-      method="POST"
-      target="hidden_iframe"
-      action="https://0140e1bd.sibforms.com/serve/MUIFAOOVyIg_Cfwv5nZp80lUy3Enq3zIE1JJFI4e_2mbkZEM5TGt8WScTgwGKPGUPcB6wjlwcq_w-Pq33aDPaW1qS3bo7hs7GkblmCLNYOHWYi2yLnHD7tv5gcrz7WOQlG-s5eDX07mhQk1Z6ReuGbFq_IYCd4BUwtPmhk0bBYUf9kOezm6ew1H0yi4j44l29V-jm1HZ2xcZxY0IKQ==">
-
-  <input type="hidden" name="EMAIL" id="brevo_email">
-  <input type="hidden" name="FIRSTNAME" id="brevo_name">
-  <input type="hidden" name="BIRTHDAY" id="brevo_birthday">
-
-  <input type="hidden" name="locale" value="en">
-  <input type="hidden" name="html_type" value="simple">
-
-</form>
-
-<!-- hidden iframe prevents redirect -->
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-
-<script>
-document.getElementById("joinButton").addEventListener("click", function (e) {
-  e.preventDefault();
-
-  const email = document.getElementById("email").value.trim();
-  const name = document.getElementById("name").value.trim();
-  const birthday = document.getElementById("birthday").value.trim();
-
-  // basic validation
-  if (!email || !name) {
-    alert("Please fill out name and email.");
-    return;
-  }
-
-  // map fields
-  document.getElementById("brevo_email").value = email;
-  document.getElementById("brevo_name").value = name;
-  document.getElementById("brevo_birthday").value = birthday;
-
-  // submit silently
-  document.getElementById("brevoForm").submit();
-
-  // show success overlay
-  document.getElementById("successMessage").style.display = "flex";
-
-  // optional cleanup
-  document.getElementById("name").value = "";
-  document.getElementById("email").value = "";
-  document.getElementById("birthday").value = "";
-
-  // auto-hide after 3 seconds (optional)
-  setTimeout(() => {
-    document.getElementById("successMessage").style.display = "none";
-  }, 3000);
-});
-</script>
+</div>
 
 </body>
 </html>
