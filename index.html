@@ -21,14 +21,14 @@ html, body {
   background-repeat: no-repeat;
 }
 
-/* YOUR EXISTING UI (unchanged layout) */
+/* FORM LAYER */
 .form-layer {
   position: fixed;
   inset: 0;
   z-index: 2;
 }
 
-/* Inputs styled to match your design */
+/* INPUTS */
 input {
   position: absolute;
   border: none;
@@ -39,13 +39,12 @@ input {
   caret-color: white;
 }
 
-/* Focus effect */
 input:focus {
   background: rgba(255,255,255,0.10);
   border-radius: 4px;
 }
 
-/* EXACT POSITIONING (your design preserved) */
+/* POSITIONING */
 #name {
   top: 51.5%;
   left: 29%;
@@ -67,7 +66,7 @@ input:focus {
   height: 2%;
 }
 
-/* YOUR JOIN BUTTON (now clickable but invisible Brevo trigger behind it) */
+/* INVISIBLE BUTTON HIT AREA */
 #joinButton {
   position: absolute;
   top: 63%;
@@ -78,26 +77,65 @@ input:focus {
   border: none;
   cursor: pointer;
 }
+
+/* SUCCESS OVERLAY */
+#successMessage {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+}
+
+.success-box {
+  text-align: center;
+  color: white;
+  padding: 22px 30px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.success-box h2 {
+  margin: 0 0 8px 0;
+  font-size: 22px;
+}
+
+.success-box p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.85;
+}
 </style>
 </head>
 
 <body>
 
-<!-- YOUR VISUAL DESIGN -->
 <div class="form-layer">
 
   <input id="name" type="text" placeholder="Name" />
   <input id="email" type="email" placeholder="Email" />
   <input id="birthday" type="text" placeholder="Bday mm/dd/yyyy" />
 
-  <!-- THIS is your JOIN button from the image -->
   <button id="joinButton"></button>
 
 </div>
 
-<!-- HIDDEN BREVO FORM (REAL BACKEND) -->
+<!-- SUCCESS MESSAGE -->
+<div id="successMessage">
+  <div class="success-box">
+    <h2>You're in.</h2>
+    <p>Welcome to The Green Sturgeon.</p>
+  </div>
+</div>
+
+<!-- HIDDEN BREVO FORM -->
 <form id="brevoForm"
       method="POST"
+      target="hidden_iframe"
       action="https://0140e1bd.sibforms.com/serve/MUIFAOOVyIg_Cfwv5nZp80lUy3Enq3zIE1JJFI4e_2mbkZEM5TGt8WScTgwGKPGUPcB6wjlwcq_w-Pq33aDPaW1qS3bo7hs7GkblmCLNYOHWYi2yLnHD7tv5gcrz7WOQlG-s5eDX07mhQk1Z6ReuGbFq_IYCd4BUwtPmhk0bBYUf9kOezm6ew1H0yi4j44l29V-jm1HZ2xcZxY0IKQ==">
 
   <input type="hidden" name="EMAIL" id="brevo_email">
@@ -109,18 +147,43 @@ input:focus {
 
 </form>
 
+<!-- hidden iframe prevents redirect -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
 <script>
-document.getElementById("joinButton").addEventListener("click", function() {
+document.getElementById("joinButton").addEventListener("click", function (e) {
+  e.preventDefault();
 
-  // map your visible fields → brevo hidden fields
-  document.getElementById("brevo_email").value = document.getElementById("email").value;
-  document.getElementById("brevo_name").value = document.getElementById("name").value;
-  document.getElementById("brevo_birthday").value = document.getElementById("birthday").value;
+  const email = document.getElementById("email").value.trim();
+  const name = document.getElementById("name").value.trim();
+  const birthday = document.getElementById("birthday").value.trim();
 
-  // submit to Brevo
+  // basic validation
+  if (!email || !name) {
+    alert("Please fill out name and email.");
+    return;
+  }
+
+  // map fields
+  document.getElementById("brevo_email").value = email;
+  document.getElementById("brevo_name").value = name;
+  document.getElementById("brevo_birthday").value = birthday;
+
+  // submit silently
   document.getElementById("brevoForm").submit();
 
-  alert("You're in.");
+  // show success overlay
+  document.getElementById("successMessage").style.display = "flex";
+
+  // optional cleanup
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("birthday").value = "";
+
+  // auto-hide after 3 seconds (optional)
+  setTimeout(() => {
+    document.getElementById("successMessage").style.display = "none";
+  }, 3000);
 });
 </script>
 
