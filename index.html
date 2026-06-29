@@ -1,159 +1,53 @@
- <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
-<title>The Green Sturgeon</title>
-
 <style>
+  /* Hide the third empty box / spacer if Brevo injects it */
+  #sib-container .sib-form-block:empty,
+  #sib-container .sib-form-message-panel,
+  #sib-container .sib-form-message-panel--active,
+  #sib-container .sib-form-message-panel__text,
+  #sib-container .sib-alert-message,
+  #sib-container .sib-form-block__message,
+  #sib-container .sib-loader {
+    display: none !important;
+  }
 
-/* =========================
-   BACKGROUND
-========================= */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-
-  background-image: url("hero.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* =========================
-   FORM POSITION (MOVED LOWER)
-========================= */
-.form-wrap {
-  position: absolute;
-  top: 68%; /* ⬅️ LOWER (was ~55%) */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(310px, 88vw);
-  z-index: 10;
-}
-
-/* =========================
-   BREVO RESET
-========================= */
-#sib-container,
-.sib-container--large,
-.sib-form {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-}
-
-/* =========================
-   NEWSLETTER BLOCK (FIXED)
-========================= */
-.sib-form-block p {
-  text-align: center;
-  color: rgba(201, 170, 90, 0.95) !important; /* same gold as "COMING SOON" */
-  margin: 0;
-  font-size: 13px !important; /* SAME SIZE BOTH LINES */
-  line-height: 1.4;
-}
-
-.sib-form-block p:first-child {
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-/* =========================
-   REMOVE EMAIL LABEL
-========================= */
-.entry__label {
-  display: none !important;
-}
-
-/* =========================
-   INPUT (SMALL + MATCHED WIDTH)
-========================= */
-input {
-  width: 100% !important;
-  box-sizing: border-box;
-  padding: 8px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.25);
-  color: white;
-  border-radius: 6px;
-  outline: none;
-  font-size: 13px;
-}
-
-input::placeholder {
-  color: rgba(255,255,255,0.5);
-}
-
-/* =========================
-   SUBSCRIBE BUTTON (SMALLER)
-========================= */
-button {
-  width: 100%;
-  padding: 8px; /* smaller */
-  background: rgba(200, 170, 90, 0.85);
-  border: none;
-  border-radius: 6px;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 12px; /* smaller text */
-  letter-spacing: 0.5px;
-}
-
-button:hover {
-  background: rgba(220, 190, 110, 0.95);
-}
-
+  /* Optional: hide any empty direct children that create blank rows */
+  #sib-container > div:empty {
+    display: none !important;
+  }
 </style>
-</head>
 
-<body>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function removeBrevoGhostBoxes() {
+    const selectors = [
+      '#sib-container .sib-form-message-panel',
+      '#sib-container .sib-form-message-panel--active',
+      '#sib-container .sib-form-message-panel__text',
+      '#sib-container .sib-alert-message',
+      '#sib-container .sib-form-block__message',
+      '#sib-container .sib-loader',
+      '#sib-container .sib-form-block:empty',
+      '#sib-container > div:empty'
+    ];
 
-<div class="form-wrap">
+    selectors.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => el.style.display = "none");
+    });
 
-  <div class="sib-form">
-    <div id="sib-form-container" class="sib-form-container">
-      <div id="sib-container" class="sib-container--large sib-container--vertical">
+    document.querySelectorAll('#sib-container div').forEach(div => {
+      const text = (div.innerText || '').trim();
+      if (!text && div.children.length === 0) {
+        div.style.display = "none";
+      }
+    });
+  }
 
-        <form id="sib-form"
-              method="POST"
-              action="https://0140e1bd.sibforms.com/serve/MUIFAOOVyIg_Cfwv5nZp80lUy3Enq3zIE1JJFI4e_2mbkZEM5TGt8WScTgwGKPGUPcB6wjlwcq_w-Pq33aDPaW1qS3bo7hs7GkblmCLNYOHWYi2yLnHD7tv5gcrz7WOQlG-s5eDX07mhQk1Z6ReuGbFq_IYCd4BUwtPmhk0bBYUf9kOezm6ew1H0yi4j44l29V-jm1HZ2xcZxY0IKQ==">
+  removeBrevoGhostBoxes();
 
-          <!-- NEWSLETTER -->
-          <div class="sib-form-block">
-            <p>Newsletter</p>
-            <p>Stay updated with The Green Sturgeon</p>
-          </div>
-
-          <!-- EMAIL INPUT -->
-          <input type="email" id="EMAIL" name="EMAIL" placeholder="Enter your email" required />
-
-          <!-- SUBSCRIBE -->
-          <button type="submit">SUBSCRIBE</button>
-
-          <!-- HIDDEN BREVO FIELD -->
-          <input type="text" name="email_address_check" value="" class="input--hidden">
-          <input type="hidden" name="locale" value="en">
-          <input type="hidden" name="html_type" value="simple">
-
-        </form>
-
-      </div>
-    </div>
-  </div>
-
-</div>
-
-</body>
-</html>
+  const target = document.body;
+  if (target) {
+    const observer = new MutationObserver(removeBrevoGhostBoxes);
+    observer.observe(target, { childList: true, subtree: true });
+  }
+});
+</script>    
