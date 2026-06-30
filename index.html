@@ -5,94 +5,129 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <title>The Green Sturgeon</title>
 
-<!-- Brevo required styles (DO NOT REMOVE) -->
 <style>
-@font-face {
-  font-display: block;
-  font-family: Roboto;
-  src: url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2) format("woff2"),
-       url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff) format("woff");
-}
 
-body {
+/* =========================
+   BASE
+========================= */
+html, body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-
+  font-family: Arial, sans-serif;
   background-image: url("hero.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* CENTER FORM */
+/* =========================
+   CENTER FIX (IMPORTANT CHANGE)
+========================= */
 .form-wrap {
-  position: absolute;
-  top: 66%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(320px, 88vw);
+  position: fixed;              /* FIXES MOBILE + SCROLL ISSUES */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 10;
+  padding-top: 20vh;            /* pushes it slightly lower on hero */
+  box-sizing: border-box;
 }
 
-/* ONLY SAFE OVERRIDES */
-#sib-container {
+/* =========================
+   BREVO RESET (STRONG)
+========================= */
+.sib-form,
+#sib-container,
+.sib-container--large,
+.sib-container--vertical {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+  width: 100% !important;
+  max-width: 320px !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-.sib-form-message-panel {
-  display: none !important;
+/* REMOVE SPACING THAT WAS PUSHING EVERYTHING DOWN */
+.sib-form-block {
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-/* TEXT */
+/* =========================
+   TEXT
+========================= */
 .sib-form-block p {
   text-align: center;
   color: rgba(201,170,90,0.95);
   margin: 0;
   font-size: 13px;
+  line-height: 1.4;
 }
 
-/* INPUT */
-input[type="text"], input[type="email"] {
+.sib-form-block p:first-child {
+  font-weight: 600;
+}
+
+/* =========================
+   INPUT (FIXED CENTER LOOK)
+========================= */
+input[type="email"],
+input[type="text"] {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 6px;
   border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.35);
   color: white;
   font-size: 13px;
+  box-sizing: border-box;
 }
 
-/* BUTTON */
+input::placeholder {
+  color: rgba(255,255,255,0.55);
+}
+
+/* =========================
+   BUTTON
+========================= */
 button {
   width: 100%;
   padding: 10px;
-  background: rgba(200,170,90,0.85);
+  background: rgba(200,170,90,0.9);
   border: none;
   border-radius: 6px;
   color: black;
   font-weight: bold;
   cursor: pointer;
   font-size: 12px;
+  letter-spacing: .5px;
 }
 
 button:hover {
   background: rgba(220,190,110,0.95);
 }
 
-/* HIDE BOT FIELD (SAFE) */
+/* =========================
+   HIDE BOT FIELD (SAFE)
+========================= */
 input[name="email_address_check"] {
-  position: absolute;
-  left: -9999px;
+  position: absolute !important;
+  left: -9999px !important;
 }
+
 </style>
 
-<!-- REQUIRED BREVO STYLE -->
 <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
 
 </head>
@@ -101,7 +136,6 @@ input[name="email_address_check"] {
 
 <div class="form-wrap">
 
-  <!-- ================= BREVO ORIGINAL FORM (REQUIRED STRUCTURE) ================= -->
   <div class="sib-form">
     <div id="sib-form-container" class="sib-form-container">
 
@@ -114,33 +148,22 @@ input[name="email_address_check"] {
           data-type="subscription"
         >
 
-          <!-- TEXT -->
           <div class="sib-form-block">
             <p>Newsletter</p>
             <p>Stay updated with The Green Sturgeon</p>
           </div>
 
-          <!-- EMAIL (KEEP EXACT NAME) -->
-          <div class="sib-input sib-form-block">
-            <input
-              type="email"
-              id="EMAIL"
-              name="EMAIL"
-              placeholder="Enter your email"
-              required
-            >
-          </div>
+          <input
+            type="email"
+            id="EMAIL"
+            name="EMAIL"
+            placeholder="Enter your email"
+            required
+          >
 
-          <!-- SUBMIT -->
-          <div class="sib-form-block">
-            <button type="submit">
-              SUBSCRIBE
-            </button>
-          </div>
+          <button type="submit">SUBSCRIBE</button>
 
-          <!-- REQUIRED BREVO HIDDEN FIELD -->
           <input type="text" name="email_address_check" value="" autocomplete="off">
-
           <input type="hidden" name="locale" value="en">
 
         </form>
@@ -151,7 +174,6 @@ input[name="email_address_check"] {
 
 </div>
 
-<!-- REQUIRED SCRIPT (MUST BE LAST) -->
 <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 
 </body>
