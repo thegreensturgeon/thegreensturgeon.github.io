@@ -25,11 +25,11 @@ html, body {
 }
 
 /* =========================
-   FORM POSITION (MOVED LOWER)
+   FORM POSITION
 ========================= */
 .form-wrap {
   position: absolute;
-  top: 68%; /* ⬅️ LOWER (was ~55%) */
+  top: 74%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: min(310px, 88vw);
@@ -52,13 +52,13 @@ html, body {
 }
 
 /* =========================
-   NEWSLETTER BLOCK (FIXED)
+   NEWSLETTER BLOCK
 ========================= */
 .sib-form-block p {
   text-align: center;
-  color: rgba(201, 170, 90, 0.95) !important; /* same gold as "COMING SOON" */
+  color: rgba(201,170,90,0.95) !important;
   margin: 0;
-  font-size: 13px !important; /* SAME SIZE BOTH LINES */
+  font-size: 13px !important;
   line-height: 1.4;
 }
 
@@ -75,9 +75,9 @@ html, body {
 }
 
 /* =========================
-   INPUT (SMALL + MATCHED WIDTH)
+   EMAIL INPUT
 ========================= */
-input {
+input[type="email"] {
   width: 100% !important;
   box-sizing: border-box;
   padding: 8px;
@@ -91,28 +91,42 @@ input {
   font-size: 13px;
 }
 
-input::placeholder {
+input[type="email"]::placeholder {
   color: rgba(255,255,255,0.5);
 }
 
 /* =========================
-   SUBSCRIBE BUTTON (SMALLER)
+   SUBSCRIBE BUTTON
 ========================= */
 button {
   width: 100%;
-  padding: 8px; /* smaller */
-  background: rgba(200, 170, 90, 0.85);
+  padding: 8px;
+  background: rgba(200,170,90,0.85);
   border: none;
   border-radius: 6px;
   color: black;
   font-weight: bold;
   cursor: pointer;
-  font-size: 12px; /* smaller text */
-  letter-spacing: 0.5px;
+  font-size: 12px;
+  letter-spacing: .5px;
 }
 
 button:hover {
-  background: rgba(220, 190, 110, 0.95);
+  background: rgba(220,190,110,0.95);
+}
+
+/* =========================
+   HIDE BREVO HIDDEN FIELD
+========================= */
+.input--hidden,
+input[name="email_address_check"] {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
 }
 
 </style>
@@ -126,26 +140,52 @@ button:hover {
     <div id="sib-form-container" class="sib-form-container">
       <div id="sib-container" class="sib-container--large sib-container--vertical">
 
-        <form id="sib-form"
-              method="POST"
-              action="https://0140e1bd.sibforms.com/serve/MUIFAOOVyIg_Cfwv5nZp80lUy3Enq3zIE1JJFI4e_2mbkZEM5TGt8WScTgwGKPGUPcB6wjlwcq_w-Pq33aDPaW1qS3bo7hs7GkblmCLNYOHWYi2yLnHD7tv5gcrz7WOQlG-s5eDX07mhQk1Z6ReuGbFq_IYCd4BUwtPmhk0bBYUf9kOezm6ew1H0yi4j44l29V-jm1HZ2xcZxY0IKQ==">
+        <form
+          id="sib-form"
+          method="POST"
+          action="https://0140e1bd.sibforms.com/serve/MUIFAOOVyIg_Cfwv5nZp80lUy3Enq3zIE1JJFI4e_2mbkZEM5TGt8WScTgwGKPGUPcB6wjlwcq_w-Pq33aDPaW1qS3bo7hs7GkblmCLNYOHWYi2yLnHD7tv5gcrz7WOQlG-s5eDX07mhQk1Z6ReuGbFq_IYCd4BUwtPmhk0bBYUf9kOezm6ew1H0yi4j44l29V-jm1HZ2xcZxY0IKQ==">
 
-          <!-- NEWSLETTER -->
+          <!-- Newsletter -->
           <div class="sib-form-block">
             <p>Newsletter</p>
             <p>Stay updated with The Green Sturgeon</p>
           </div>
 
-          <!-- EMAIL INPUT -->
-          <input type="email" id="EMAIL" name="EMAIL" placeholder="Enter your email" required />
+          <!-- Email -->
+          <input
+            type="email"
+            id="EMAIL"
+            name="EMAIL"
+            placeholder="Enter your email"
+            required
+          >
 
-          <!-- SUBSCRIBE -->
-          <button type="submit">SUBSCRIBE</button>
+          <!-- Subscribe -->
+          <button type="submit">
+            SUBSCRIBE
+          </button>
 
-          <!-- HIDDEN BREVO FIELD -->
-          <input type="text" name="email_address_check" value="" class="input--hidden">
-          <input type="hidden" name="locale" value="en">
-          <input type="hidden" name="html_type" value="simple">
+          <!-- Hidden Brevo Fields -->
+          <input
+            type="text"
+            name="email_address_check"
+            value=""
+            class="input--hidden"
+            tabindex="-1"
+            autocomplete="off"
+          >
+
+          <input
+            type="hidden"
+            name="locale"
+            value="en"
+          >
+
+          <input
+            type="hidden"
+            name="html_type"
+            value="simple"
+          >
 
         </form>
 
