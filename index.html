@@ -8,7 +8,7 @@
 <style>
 
 /* =========================
-   BASE
+   BACKGROUND FIX
 ========================= */
 html, body {
   margin: 0;
@@ -17,6 +17,7 @@ html, body {
   height: 100%;
   overflow: hidden;
   font-family: Arial, sans-serif;
+
   background-image: url("hero.jpg");
   background-size: cover;
   background-position: center;
@@ -24,46 +25,41 @@ html, body {
 }
 
 /* =========================
-   CENTER FIX (IMPORTANT CHANGE)
+   STRONG CENTER FIX (NO BREAK)
 ========================= */
 .form-wrap {
-  position: fixed;              /* FIXES MOBILE + SCROLL ISSUES */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 18vh; /* keeps it on lower part of hero */
   z-index: 10;
-  padding-top: 20vh;            /* pushes it slightly lower on hero */
   box-sizing: border-box;
 }
 
 /* =========================
-   BREVO RESET (STRONG)
+   DO NOT BREAK BREVO CORE
 ========================= */
-.sib-form,
 #sib-container,
 .sib-container--large,
-.sib-container--vertical {
+.sib-container--vertical,
+.sib-form {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   width: 100% !important;
-  max-width: 320px !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  max-width: 340px !important;
 }
 
-/* REMOVE SPACING THAT WAS PUSHING EVERYTHING DOWN */
+/* REMOVE ONLY VISUAL SPACING ISSUES */
 .sib-form-block {
-  padding: 0 !important;
   margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* =========================
-   TEXT
+   TEXT STYLE
 ========================= */
 .sib-form-block p {
   text-align: center;
@@ -73,12 +69,8 @@ html, body {
   line-height: 1.4;
 }
 
-.sib-form-block p:first-child {
-  font-weight: 600;
-}
-
 /* =========================
-   INPUT (FIXED CENTER LOOK)
+   INPUT FIX (IMPORTANT)
 ========================= */
 input[type="email"],
 input[type="text"] {
@@ -94,12 +86,8 @@ input[type="text"] {
   box-sizing: border-box;
 }
 
-input::placeholder {
-  color: rgba(255,255,255,0.55);
-}
-
 /* =========================
-   BUTTON
+   BUTTON (DO NOT OVERRIDE TYPE)
 ========================= */
 button {
   width: 100%;
@@ -111,7 +99,6 @@ button {
   font-weight: bold;
   cursor: pointer;
   font-size: 12px;
-  letter-spacing: .5px;
 }
 
 button:hover {
@@ -119,11 +106,11 @@ button:hover {
 }
 
 /* =========================
-   HIDE BOT FIELD (SAFE)
+   HIDDEN FIELD (SAFE)
 ========================= */
 input[name="email_address_check"] {
-  position: absolute !important;
-  left: -9999px !important;
+  position: absolute;
+  left: -9999px;
 }
 
 </style>
@@ -141,6 +128,7 @@ input[name="email_address_check"] {
 
       <div id="sib-container" class="sib-container--large sib-container--vertical">
 
+        <!-- IMPORTANT: DO NOT CHANGE STRUCTURE -->
         <form
           id="sib-form"
           method="POST"
@@ -153,12 +141,14 @@ input[name="email_address_check"] {
             <p>Stay updated with The Green Sturgeon</p>
           </div>
 
+          <!-- KEEP AS TEXT (Brevo expects this) -->
           <input
-            type="email"
+            type="text"
             id="EMAIL"
             name="EMAIL"
             placeholder="Enter your email"
             required
+            autocomplete="off"
           >
 
           <button type="submit">SUBSCRIBE</button>
@@ -174,6 +164,7 @@ input[name="email_address_check"] {
 
 </div>
 
+<!-- MUST BE LAST -->
 <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 
 </body>
