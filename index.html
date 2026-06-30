@@ -3,174 +3,107 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 <title>The Green Sturgeon</title>
 
-<!-- Brevo REQUIRED CSS (unchanged) -->
-<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
-
 <style>
-
-/* =========================
-   GLOBAL RESET (SAFE)
-========================= */
-html, body {
+* {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-
-  /* KEEP SCROLL (IMPORTANT FOR BREVO JS) */
-  min-height: 100vh;
-
-  /* your hero background */
-  background: url("hero.jpg") center center / cover no-repeat;
-}
-
-/* dark overlay for readability */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  pointer-events: none;
-}
-
-/* =========================
-   CENTER LAYOUT (SAFE VERSION)
-========================= */
-.page-wrap {
-  position: relative;
-  min-height: 100vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: flex-end; /* pushes form lower like your screenshot */
-
-  padding: 0 20px 80px;
-  box-sizing: border-box;
-  z-index: 1;
-}
-
-/* =========================
-   BREVO WRAPPER ONLY (NO STRUCTURE CHANGES)
-========================= */
-#sib-container {
-  max-width: 360px !important;
-  width: 100% !important;
-  border-radius: 10px !important;
-  overflow: hidden;
-}
-
-/* remove default heavy styling but DO NOT break layout */
-.sib-form {
-  background: transparent !important;
-}
-
-/* =========================
-   TEXT STYLE (SAFE OVERRIDE ONLY)
-========================= */
-.sib-form-block p {
-  text-align: center !important;
-  color: #c9aa5a !important;
-  margin: 0;
-}
-
-/* =========================
-   INPUT FIX (SAFE)
-========================= */
-input[type="text"] {
-  width: 100% !important;
-  padding: 12px !important;
-  margin-top: 10px !important;
-
-  border-radius: 6px !important;
-  border: 1px solid rgba(255,255,255,0.25) !important;
-
-  background: rgba(0,0,0,0.4) !important;
-  color: white !important;
-
   box-sizing: border-box;
 }
 
-/* =========================
-   BUTTON FIX (SAFE ONLY)
-========================= */
-button {
-  width: 100% !important;
-  margin-top: 10px !important;
-
-  padding: 12px !important;
-  border-radius: 6px !important;
-
-  background: rgba(200,170,90,0.95) !important;
-  color: black !important;
-
-  font-weight: bold !important;
-  border: none !important;
-}
-
-/* =========================
-   IMPORTANT: DO NOT BREAK BREVO JS
-========================= */
-/* KEEP scrolling enabled */
 body {
-  overflow-x: hidden;
-  overflow-y: auto;
+  font-family: Arial, sans-serif;
+  background: #0f1f17;
+  color: #f4f4f4;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
 }
 
-</style>
+.container {
+  width: 100%;
+  max-width: 500px;
+}
 
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+p {
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #2ecc71;
+  color: white;
+  font-size: 1rem;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.small {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+</style>
 </head>
 
 <body>
 
-<div class="page-wrap">
+<div class="container">
 
-  <!-- =========================
-       BREVO FORM (UNCHANGED)
-  ========================= -->
-  <div class="sib-form">
+  <h1>The Green Sturgeon</h1>
 
-    <div id="sib-form-container" class="sib-form-container">
+  <p>Fresh updates and drops.<br>No spam.</p>
 
-      <div id="sib-container" class="sib-container--large sib-container--vertical">
+  <input type="email" id="email" placeholder="Enter your email" required>
 
-        <form
-          id="sib-form"
-          method="POST"
-          action="https://0140e1bd.sibforms.com/serve/MUIFAOOVyIg_Cfwv5nZp80lUy3Enq3zIE1JJFI4e_2mbkZEM5TGt8WScTgwGKPGUPcB6wjlwcq_w-Pq33aDPaW1qS3bo7hs7GkblmCLNYOHWYi2yLnHD7tv5gcrz7WOQlG-s5eDX07mhQk1Z6ReuGbFq_IYCd4BUwtPmhk0bBYUf9kOezm6ew1H0yi4j44l29V-jm1HZ2xcZxY0IKQ=="
-          data-type="subscription"
-        >
+  <button onclick="saveEmail()">Subscribe</button>
 
-          <div class="sib-form-block">
-            <p>Newsletter</p>
-            <p>Stay updated with The Green Sturgeon</p>
-          </div>
-
-          <input
-            type="text"
-            id="EMAIL"
-            name="EMAIL"
-            placeholder="Enter your email"
-            required
-            autocomplete="off"
-          >
-
-          <button type="submit">SUBSCRIBE</button>
-
-          <input type="text" name="email_address_check" value="" class="input--hidden">
-          <input type="hidden" name="locale" value="en">
-
-        </form>
-
-      </div>
-    </div>
-  </div>
+  <div class="small">You can unsubscribe anytime.</div>
 
 </div>
 
-<!-- MUST BE LAST (BREVO SCRIPT) -->
-<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+<script>
+function saveEmail() {
+  const email = document.getElementById("email").value;
+
+  if (!email) {
+    alert("Please enter an email");
+    return;
+  }
+
+  // stores locally in browser (for now)
+  let list = JSON.parse(localStorage.getItem("emails") || "[]");
+  list.push(email);
+  localStorage.setItem("emails", JSON.stringify(list));
+
+  alert("Subscribed!");
+  document.getElementById("email").value = "";
+}
+</script>
 
 </body>
 </html>
