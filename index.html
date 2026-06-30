@@ -58,14 +58,15 @@ button {
   font-size: 1rem;
 }
 
-button:active {
-  transform: scale(0.98);
-}
-
 .small {
   margin-top: 12px;
-  font-size: 0.8rem;
-  opacity: 0.6;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.message {
+  margin-top: 10px;
+  font-size: 0.9rem;
 }
 </style>
 </head>
@@ -78,9 +79,11 @@ button:active {
 
   <p>Fresh updates and drops.<br>No spam.</p>
 
-  <input type="email" id="email" placeholder="Enter your email" required>
+  <input type="email" id="email" placeholder="Enter your email" />
 
   <button onclick="saveEmail()">Subscribe</button>
+
+  <div id="message" class="message"></div>
 
   <div class="small">You can unsubscribe anytime.</div>
 
@@ -89,19 +92,22 @@ button:active {
 <script>
 function saveEmail() {
   const email = document.getElementById("email").value;
+  const message = document.getElementById("message");
 
   if (!email) {
-    alert("Please enter an email");
+    message.textContent = "Please enter an email.";
+    message.style.color = "salmon";
     return;
   }
 
-  // stores locally in browser (for now)
   let list = JSON.parse(localStorage.getItem("emails") || "[]");
   list.push(email);
   localStorage.setItem("emails", JSON.stringify(list));
 
-  alert("Subscribed!");
   document.getElementById("email").value = "";
+
+  message.textContent = "Subscribed successfully!";
+  message.style.color = "#2ecc71";
 }
 </script>
 
