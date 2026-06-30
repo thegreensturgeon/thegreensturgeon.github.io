@@ -5,18 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 <title>The Green Sturgeon</title>
 
+<!-- Brevo required styles (DO NOT REMOVE) -->
 <style>
+@font-face {
+  font-display: block;
+  font-family: Roboto;
+  src: url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2) format("woff2"),
+       url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff) format("woff");
+}
 
-/* =========================
-   BACKGROUND
-========================= */
-html, body {
+body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
   font-family: Arial, sans-serif;
+  overflow: hidden;
 
   background-image: url("hero.jpg");
   background-size: cover;
@@ -24,9 +26,7 @@ html, body {
   background-repeat: no-repeat;
 }
 
-/* =========================
-   FORM POSITION
-========================= */
+/* CENTER FORM */
 .form-wrap {
   position: absolute;
   top: 66%;
@@ -36,67 +36,39 @@ html, body {
   z-index: 10;
 }
 
-/* =========================
-   BREVO RESET (SAFE VERSION)
-========================= */
-#sib-container,
-.sib-container--large,
-.sib-form {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
+/* ONLY SAFE OVERRIDES */
+#sib-container {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  padding: 0 !important;
 }
 
-/* hide default Brevo panels but KEEP functionality */
 .sib-form-message-panel {
   display: none !important;
 }
 
-/* =========================
-   TEXT
-========================= */
+/* TEXT */
 .sib-form-block p {
   text-align: center;
-  color: rgba(201,170,90,0.95) !important;
+  color: rgba(201,170,90,0.95);
   margin: 0;
-  font-size: 13px !important;
-  line-height: 1.4;
-}
-
-.sib-form-block p:first-child {
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-/* =========================
-   EMAIL INPUT (IMPORTANT FIX)
-========================= */
-input[type="text"],
-input[type="email"] {
-  width: 100% !important;
-  box-sizing: border-box;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(0,0,0,0.25);
-  color: white;
-  border-radius: 6px;
-  outline: none;
   font-size: 13px;
 }
 
-input::placeholder {
-  color: rgba(255,255,255,0.5);
+/* INPUT */
+input[type="text"], input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.25);
+  color: white;
+  font-size: 13px;
 }
 
-/* =========================
-   BUTTON
-========================= */
+/* BUTTON */
 button {
   width: 100%;
   padding: 10px;
@@ -107,93 +79,79 @@ button {
   font-weight: bold;
   cursor: pointer;
   font-size: 12px;
-  letter-spacing: .5px;
 }
 
 button:hover {
   background: rgba(220,190,110,0.95);
 }
 
-/* =========================
-   KEEP BREVO HIDDEN FIELD SAFE (DO NOT REMOVE)
-========================= */
-.input--hidden,
+/* HIDE BOT FIELD (SAFE) */
 input[name="email_address_check"] {
-  position: absolute !important;
-  left: -9999px !important;
-  opacity: 0 !important;
-  height: 0 !important;
-  width: 0 !important;
+  position: absolute;
+  left: -9999px;
 }
-
-/* =========================
-   MOBILE TWEAK
-========================= */
-@media (max-width: 480px) {
-  .form-wrap {
-    top: 70%;
-    width: 90vw;
-  }
-}
-
 </style>
+
+<!-- REQUIRED BREVO STYLE -->
+<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+
 </head>
 
 <body>
 
 <div class="form-wrap">
 
-  <!-- BREVO FORM (FULL SAFE EMBED) -->
+  <!-- ================= BREVO ORIGINAL FORM (REQUIRED STRUCTURE) ================= -->
   <div class="sib-form">
-    <div id="sib-container" class="sib-container--large sib-container--vertical">
+    <div id="sib-form-container" class="sib-form-container">
 
-      <form
-        id="sib-form"
-        method="POST"
-        action="https://0140e1bd.sibforms.com/serve/MUIFAOOVyIg_Cfwv5nZp80lUy3Enq3zIE1JJFI4e_2mbkZEM5TGt8WScTgwGKPGUPcB6wjlwcq_w-Pq33aDPaW1qS3bo7hs7GkblmCLNYOHWYi2yLnHD7tv5gcrz7WOQlG-s5eDX07mhQk1Z6ReuGbFq_IYCd4BUwtPmhk0bBYUf9kOezm6ew1H0yi4j44l29V-jm1HZ2xcZxY0IKQ=="
-        data-type="subscription"
-      >
+      <div id="sib-container" class="sib-container--large sib-container--vertical">
 
-        <!-- TEXT -->
-        <div class="sib-form-block">
-          <p>Newsletter</p>
-          <p>Stay updated with The Green Sturgeon</p>
-        </div>
-
-        <!-- EMAIL (KEEP NAME EXACTLY EMAIL) -->
-        <input
-          type="text"
-          id="EMAIL"
-          name="EMAIL"
-          placeholder="Enter your email"
-          autocomplete="off"
-          required
+        <form
+          id="sib-form"
+          method="POST"
+          action="https://0140e1bd.sibforms.com/serve/MUIFAOOVyIg_Cfwv5nZp80lUy3Enq3zIE1JJFI4e_2mbkZEM5TGt8WScTgwGKPGUPcB6wjlwcq_w-Pq33aDPaW1qS3bo7hs7GkblmCLNYOHWYi2yLnHD7tv5gcrz7WOQlG-s5eDX07mhQk1Z6ReuGbFq_IYCd4BUwtPmhk0bBYUf9kOezm6ew1H0yi4j44l29V-jm1HZ2xcZxY0IKQ=="
+          data-type="subscription"
         >
 
-        <!-- SUBMIT -->
-        <button type="submit">
-          SUBSCRIBE
-        </button>
+          <!-- TEXT -->
+          <div class="sib-form-block">
+            <p>Newsletter</p>
+            <p>Stay updated with The Green Sturgeon</p>
+          </div>
 
-        <!-- REQUIRED BREVO FIELD -->
-        <input
-          type="text"
-          name="email_address_check"
-          value=""
-          tabindex="-1"
-          autocomplete="off"
-        >
+          <!-- EMAIL (KEEP EXACT NAME) -->
+          <div class="sib-input sib-form-block">
+            <input
+              type="email"
+              id="EMAIL"
+              name="EMAIL"
+              placeholder="Enter your email"
+              required
+            >
+          </div>
 
-        <input type="hidden" name="locale" value="en">
+          <!-- SUBMIT -->
+          <div class="sib-form-block">
+            <button type="submit">
+              SUBSCRIBE
+            </button>
+          </div>
 
-      </form>
+          <!-- REQUIRED BREVO HIDDEN FIELD -->
+          <input type="text" name="email_address_check" value="" autocomplete="off">
 
+          <input type="hidden" name="locale" value="en">
+
+        </form>
+
+      </div>
     </div>
   </div>
 
 </div>
 
-<!-- CRITICAL BREVO SCRIPT (DO NOT REMOVE) -->
+<!-- REQUIRED SCRIPT (MUST BE LAST) -->
 <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 
 </body>
